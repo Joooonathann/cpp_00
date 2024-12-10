@@ -1,4 +1,4 @@
-#ifndef __PHONEBOOK_
+#ifndef __PHONEBOOK__
 	#define __PHONEBOOK__
 
 	#include "../include/Contact.hpp"
