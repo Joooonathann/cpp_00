@@ -35,6 +35,24 @@ int     is_not_number(std::string str)
     return (0);
 }
 
+bool is_printable_fd(const std::string& str) {
+    for (size_t i = 0; i < str.length(); i++) {
+        if (!std::isprint(str[i])) {
+            return (false);
+        }
+    }
+    return (true);
+}
+
+bool is_spaceno(const std::string& str) {
+    for (size_t i = 0; i < str.length(); i++) {
+        if (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' || str[i] == '\r') {
+            return (false);
+        }
+    }
+    return (true);
+}
+
 void	PhoneBook::AddContact(void)
 {
 	int			i;
@@ -55,6 +73,10 @@ void	PhoneBook::AddContact(void)
             std::cout << "Error: " << fields[i] << " cannot be empty." << std::endl;
         else if (i == 3 && is_not_number(info[i]))
             std::cout << "Error: " << fields[i] << " can only contain numbers." << std::endl;
+        else if (!is_printable_fd(info[i]))
+            std::cout << "Error: " << fields[i] << " cannot contain non printable character." << std::endl;
+        else if (!is_spaceno(info[i]))
+            std::cout << "Error: " << fields[i] << " cannot contain white-space." << std::endl;
 		else
 			i++;
 	}

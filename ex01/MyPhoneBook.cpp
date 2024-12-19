@@ -14,6 +14,15 @@ void	PrintBanner(void)
 	std::cout << std::endl;
 }
 
+bool is_printable(const std::string& str) {
+    for (size_t i = 0; i < str.length(); i++) {
+        if (!std::isprint(str[i])) {
+            return (false);
+        }
+    }
+    return (true);
+}
+
 void	PrintPrompt(std::string &command)
 {
 	std::cout << std::getenv("USER") << ": ";
@@ -36,12 +45,15 @@ int main(void)
 			std::cout << "Exiting PhoneBook now." << std::endl;
 			return (0);
 		}
-		if (command == "ADD")
-			phone.AddContact();
-		if (command == "SEARCH")
-			phone.SearchContact();
-    	if (command == "EXIT")
-        	run = false;
+		if (is_printable(command))
+		{
+			if (command == "ADD")
+				phone.AddContact();
+			if (command == "SEARCH")
+				phone.SearchContact();
+			if (command == "EXIT")
+				run = false;
+		}
     }
 	return (0);
 }
